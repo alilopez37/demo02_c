@@ -1,0 +1,17 @@
+POST
+
+http://ec2-52-23-209-79.compute-1.amazonaws.com/user/
+
+{
+    "name": "nombre",
+    "lastname": "lastname",
+    "username": "username",
+    "password": "password"
+}
+
+GET
+http://ec2-52-23-209-79.compute-1.amazonaws.com/user/
+{
+    "username":"username",
+    "password": "password"
+}
