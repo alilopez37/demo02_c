@@ -1,37 +1,55 @@
-import {useState} from 'react'
+import {Link, useNavigate} from 'react-router-dom';
+import { useFormik } from 'formik';
 import '../assets/styles/Form.css';
 
 
 function Form() {
-    const [count, setCount] = useState(0);
+    const navigate = useNavigate();
 
-    const handleFocus = () => {
-        console.log('Evento focus')
-    }
+    //Declaración del hook de Formik
+    const formik = useFormik({
+        //initialValues objeto que contiene los campos del formulario
+        initialValues: {
+            username: "",
+            password: "",
+        },
+        // onSubmit método que recibe el handler de submit
+        onSubmit: (values) => {
+            navigate("/characters");    
+        }
+    });
 
-    const handleBlur = (event) => {
-        console.log(event.target.value)
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('Submit')
-    }
     return (
         <div className="container">
             <div className="container_login">
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={formik.handleSubmit}>
                     <div className='box'>
                         <label htmlFor="username">Nombre de usuario</label>
-                        <input className="input_style" type="text" id="username" onFocus={handleFocus} onBlur={handleBlur} value={count}/>
+                        <input className="input_style" 
+                            type="text" 
+                            id="username" 
+                            name="username"
+                            value={formik.values.username}
+                            onChange={formik.handleChange}/>
                     </div>
                     <div className='box'>
                         <label htmlFor="password">Contraseña</label>
-                        <input className="input_style" type="password" id="password"  />
+                        <input className="input_style" 
+                            type="password" 
+                            id="password"
+                            name="password"
+                            value={formik.values.password}
+                            onChange={formik.handleChange}  />
                     </div>
 
                     <div className="box">
-                        <button className="boton" onClick={()=> setCount(count+1)}>Iniciar sesión</button>
+                        <button className="boton">Iniciar sesión</button>
+                    </div>
+
+                    <div className="box">
+                        <label>¿Aún no tienes cuenta?
+                            <Link to="/register">Regístrate</Link>
+                        </label>
                     </div>
                 </form>
             </div>

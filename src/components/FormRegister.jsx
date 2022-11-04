@@ -42,7 +42,6 @@ function FormRegister() {
     return ( 
     
         <div className="container">
-            
             <div className="container_login">
 
                 <form onSubmit={handleSubmit}>
